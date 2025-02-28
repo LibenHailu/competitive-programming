@@ -5,17 +5,27 @@ class Solution:
             adj[src].append(dst)
             adj[dst].append(src)
         visited = set()
-        def dfs(node):
+        visited.add(source)
+        q = deque([source])
+        while q:
+            node = q.popleft()
             if node == destination:
                 return True
-            
-            for nei in adj[node]:
-                if nei not in visited:
-                    visited.add(nei)
-                    if dfs(nei):
-                        return True
-            return False
-        return dfs(source)
+            for child in adj[node]:
+                if child not in visited:
+                    visited.add(child)
+                    q.append(child)
+        return False
+        # def dfs(node):
+        #     if node == destination:
+        #         return True
+        #     for nei in adj[node]:
+        #         if nei not in visited:
+        #             visited.add(nei)
+        #             if dfs(nei):
+        #                 return True
+        #     return False
+        # return dfs(source)
 #         stack = [source]
 #         visited.add(source)
 #         while stack:
